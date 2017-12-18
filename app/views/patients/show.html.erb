@@ -1,0 +1,25 @@
+<h1><%=@patient.name%></h1>
+<h2>Currently seeing <%= @patient.doctors.count %> Doctors:</h2>
+    <%@patient.doctors.each do |doctor| %>
+      <div><%= link_to doctor.name, doctor_path(doctor.id) %></div>
+    <% end %>
+
+<br>
+
+<h2>Meds:</h2>
+<h3>To take in the morning: </h3>
+    <%@patient.prescriptions.select {|p| p.t_o_d == "Morning"}.each do |prescription| %>
+      <div><%=prescription.format %> - Prescribed by <%=link_to presciription.doctor.name, patient_path(presciription.doctor.id)%></div>
+    <% end %>
+<h3>To take at midday: </h3>
+  <%@patient.prescriptions.select {|p| p.t_o_d == "Midday"}.each do |prescription| %>
+    <div><%=prescription.format %> - Prescribed by <%=link_to presciription.doctor.name, patient_path(presciription.doctor.id)%></div>
+  <% end %>
+<h3>To take in the evening: </h3>
+    <%@patient.prescriptions.select {|p| p.t_o_d == "Evening"}.each do |prescription| %>
+      <div><%=prescription.format %> - Prescribed by <%=link_to presciription.doctor.name, patient_path(presciription.doctor.id)%></div>
+    <% end %>
+<br>
+<%= link_to "Edit Patient", edit_doctor_path(@patient.id) %>
+<%= link_to "Add Doctor", patients_new_path %>
+<%= link_to "Delete Patient", delete_patient_path(@patient.id) %>

@@ -1,0 +1,19 @@
+<h1>Edit Doctor</h1>
+<%= form_tag doctor_path(@doctor), method: "put" do %>
+  <label>Doctor Name:</label><br>
+  <%= text_field_tag :'doctor[name]', @doctor.name %><br>
+
+  <label>Specialty:</label><br>
+  <%= text_field_tag :'doctor[specialty]', @doctor.specialty %><br>
+
+  <label>Select patients:</label><br>
+  <% @patients.each do |patient| %>
+    <%= check_box_tag :'patient_ids[]', value="#{patient.id}", checked = @doctor.patient_ids.include?(patient.id) %>
+    <%= label_tag :'patient_ids[]', patient.name %>
+  <% end %><br>
+
+  <label>Create patient:</label><br>
+  <%= text_field_tag :'new_patient' %><br>
+
+  <%= submit_tag "Edit Doctor" %>
+<% end %>

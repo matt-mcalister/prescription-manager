@@ -1,0 +1,12 @@
+<h1><%=@doctor.name%></h1>
+<h2><%=@doctor.specialty%></h1>
+<br>
+<h3>Currently seeing <%= @doctor.patients.count %> Patients:</h3>
+    <%@doctor.patients.each do |patient| %>
+      <div><%= link_to patient.name, patient_path(patient.id) %></div>
+    <% end %>
+
+<br>
+<%= link_to "Edit Doctor", edit_doctor_path(@doctor.id) %>
+<%= link_to "Add Patient", patients_new_path %>
+<%= link_to "Delete Doctor", delete_doctor_path(@doctor.id) %>
